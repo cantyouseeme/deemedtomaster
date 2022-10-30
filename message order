@@ -1,0 +1,31 @@
+class Message {
+public:
+    std::string m_text;
+    int m_order;
+    static int order_generator;
+    
+    Message() {}
+
+    Message(const string& text): m_text{text}
+    , m_order{order_generator++}
+    {}
+    
+    const string& get_text() {
+        return m_text;
+    }
+    
+    bool operator<(Message& m) {
+        return this->m_order < m.m_order;
+    }
+};
+
+int Message::order_generator {0};
+
+class MessageFactory {
+public:
+    MessageFactory() {}
+    
+    Message create_message(const string& text) {
+        return Message {text};
+    }
+};
